@@ -86,12 +86,14 @@ function FastMailEnhancementSuite(options) {
     see the attached
     see the attachment
     attached file
+    enclosed for
     */
 
     $(document).on('click', 'button.s-send', function (e) {
       var body = $('.v-Compose textarea').eq(-1).val();
       var mentionsAttachments = /attach(ed|ment)/i.test(body)
-          || /ve\sincluded/i.test(body);
+          || /ve\sincluded/i.test(body)
+          || /enclosed\sfor/i.test(body);
       var hasAttachments = $('.v-Compose .v-ComposeAttachment').length !== 0;
 
       if (mentionsAttachments && !hasAttachments &&
