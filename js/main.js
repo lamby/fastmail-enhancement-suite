@@ -39,7 +39,7 @@ function FastMailEnhancementSuite(options) {
       // Call immediately, not just after the first interval
       fn();
 
-      setInterval(fn, interval);
+      return setInterval(fn, interval);
     },
     keys: function (obj) {
       var a = [];
