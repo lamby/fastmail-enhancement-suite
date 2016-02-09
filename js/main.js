@@ -72,6 +72,15 @@ function FastMailEnhancementSuite(options) {
           return undefined;
       }
       return decodeURIComponent(m[1]) || undefined;
+    },
+    waitFor: function(val, fn, interval) {
+      var timeoutID = $.setInterval(function() {
+        if (!$.defined(val)) {
+          return;
+        }
+        clearTimeout(timeoutID);
+        fn();
+      }, interval);
     }
   });
 
