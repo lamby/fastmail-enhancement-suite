@@ -98,16 +98,24 @@ function FastMailEnhancementSuite(options) {
     enclosed for
     */
 
-    $(document).on('click', 'button.s-send', function (e) {
-      var body = $('.v-Compose textarea').eq(-1).val();
-      var mentionsAttachments = /attach(ed|ment)/i.test(body)
-          || /ve\sincluded/i.test(body)
-          || /enclosed\sfor/i.test(body);
-      var hasAttachments = $('.v-Compose .v-ComposeAttachment').length !== 0;
+    $.waitFor('FastMail.ComposeController.prototype.send', function() {
+      var fn = FastMail.ComposeController.prototype.send;
 
-      if (mentionsAttachments && !hasAttachments &&
-            !confirm("Did you mean to attach files? Press OK to send anyway."))
-          e.preventDefault();
-    });
+      FastMail.ComposeController.prototype.send = function(t) {
+        t.stopPropagation();
+
+        var body = $('.v-Compose textarea').eq(-1).val();
+        var mentionsAttachments = /attach(ed|ment)/i.test(body)
+            || /ve\sincluded/i.test(body)
+            || /enclosed\sfor/i.test(body);
+        var hasAttachments = $('.v-Compose .v-ComposeAttachment').length !== 0;
+
+        if (mentionsAttachments && !hasAttachments &&
+              !confirm("Did you mean to attach files? Press OK to send anyway."))
+          return;
+
+        return fn.apply(this, Array.prototype.slice.call(arguments));
+      };
+    }, 500);
   });
 }
