@@ -102,8 +102,6 @@ function FastMailEnhancementSuite(options) {
       var fn = FastMail.ComposeController.prototype.send;
 
       FastMail.ComposeController.prototype.send = function(t) {
-        t.stopPropagation();
-
         var body = $('.v-Compose textarea').eq(-1).val();
         var mentionsAttachments = /attach(ed|ment)/i.test(body)
             || /ve\sincluded/i.test(body)
