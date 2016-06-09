@@ -24,3 +24,11 @@ chrome.storage.sync.get(null, function(items) {
     });
   });
 });
+
+chrome.runtime.onMessage.addListener(function(request) {
+  switch (request.cmd) {
+  case 'appendToSubject':
+    inject('var _s = $(".s-compose-subject input");_s.val(_s.val() + ' + JSON.stringify(request.selectionText) + ');');
+    break;
+  }
+});
