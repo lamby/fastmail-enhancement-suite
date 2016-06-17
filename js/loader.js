@@ -28,11 +28,7 @@ chrome.storage.sync.get(null, function(items) {
 chrome.runtime.onMessage.addListener(function(request) {
   switch (request.cmd) {
   case 'appendToSubject':
-    inject(
-     'var i = FastMail.mail.screens.compose.instance;' +
-     'i.subject += ' + JSON.stringify(request.selectionText) + ';' +
-     '$(".s-compose-subject input").val(i.subject);'
-    )
+    inject('FES.appendToSubject( ' + JSON.stringify(request) + ');');
     break;
   }
 });

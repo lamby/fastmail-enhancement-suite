@@ -119,4 +119,15 @@ function FastMailEnhancementSuite(options) {
       };
     }, 500);
   });
+
+  this.appendToSubject = function (request) {
+    var instance = FastMail.mail.screens.compose.instance;
+
+    // Set the underlying data store; simply adjusting the element won't change
+    // the email once sent.
+    instance.subject += request.selectionText;
+
+    // Update the "Subject" element
+    $('.s-compose-subject input').val(instance.subject);
+  };
 }
