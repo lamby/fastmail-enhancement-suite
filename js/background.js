@@ -13,8 +13,8 @@ chrome.contextMenus.create({
   ],
   "onclick": function(info, tab) {
     chrome.tabs.sendMessage(tab.id, {
-      , 'cmd': 'appendToSubject'
-        'selectionText': info.selectionText
+        'cmd': 'appendToSubject'
+      , 'selectionText': info.selectionText
     });
   }
 });
