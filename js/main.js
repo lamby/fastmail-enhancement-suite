@@ -102,13 +102,15 @@ function FastMailEnhancementSuite(options) {
       var fn = FastMail.ComposeController.prototype.send;
 
       FastMail.ComposeController.prototype.send = function(t) {
-        var body = $('.v-Compose textarea').eq(-1).val();
-        var mentionsAttachments = /attach(ed|ment)/i.test(body)
-            || /ve\sincluded/i.test(body)
-            || /enclosed\sfor/i.test(body);
-        var hasAttachments = $('.v-Compose .v-ComposeAttachment').length !== 0;
+        var instance = FastMail.mail.screens.compose.instance;
 
-        if (mentionsAttachments && !hasAttachments &&
+        var mentionsAttachments =
+             /attach(ed|ment)/i.test(instance.plainBody)
+          || /ve\sincluded/i.test(instance.plainBody)
+          || /enclosed\sfor/i.test(instance.plainBody)
+          ;
+
+        if (mentionsAttachments && instance.attachments.length === 0 &&
               !confirm("Did you mean to attach files? Press OK to send anyway."))
           return;
 
