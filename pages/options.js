@@ -6,4 +6,11 @@ var FastMailEnhancementSuiteOptions = [
     , "image": false
     , "default": true
   }
+  , {
+      "name": "append_to_subject"
+    , "title": "Append selection to subject"
+    , "description": "Add the ability to select text and append it to the subject line via right-click."
+    , "image": false
+    , "default": true
+  }
 ]
