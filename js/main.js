@@ -3,6 +3,7 @@ function FastMailEnhancementSuite(options) {
   // Configuration ////////////////////////////////////////////////////////////
 
   var defaults = {};
+
   $.each(FastMailEnhancementSuiteOptions, function() {
     defaults[this.name] = this['default'];
   });
