@@ -8,7 +8,7 @@ all: test $(DIST)
 	@nodejs tools/project.js
 	@echo ===
 	@echo
-	@echo https://chris-lamb.co.uk/admin/projects/32/edit
+	@echo https://chris-lamb.co.uk/admin/projects/53/edit
 	@echo
 	@nodejs tools/description.js
 	@echo
