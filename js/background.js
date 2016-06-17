@@ -5,7 +5,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 });
 
 chrome.contextMenus.create({
-  "title": "Append '%s' to email subject",
+  "title": "Append '%s' to subject",
   "contexts": ["selection"],
   "documentUrlPatterns": [
     "http://*.fastmail.com/mail/compose*",
