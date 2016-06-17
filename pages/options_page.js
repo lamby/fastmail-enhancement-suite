@@ -17,7 +17,9 @@ $(function() {
     });
 
     chrome.storage.sync.get(option.name, function(x) {
-      elem.prop('checked', x[option.name]);
+      var val = x[option.name];
+
+      elem.prop('checked', (typeof val === 'undefined') ? option.default : val);
     });
 
     if (option.choices) {
@@ -36,7 +38,9 @@ $(function() {
       });
 
       chrome.storage.sync.get(option.name, function(x) {
-        elem.val(x[option.name]);
+        var val = x[option.name];
+
+        elem.val((typeof val === 'undefined') ? option.default : val);
       });
     }
 
