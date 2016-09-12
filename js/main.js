@@ -125,7 +125,7 @@ function FastMailEnhancementSuite(options) {
 
     // Set the underlying data store; simply adjusting the element won't change
     // the email once sent.
-    instance.subject += request.selectionText;
+    instance.subject += request.selectionText.replace(/\s+/g, ' ');
 
     // Update the "Subject" element
     $('.s-compose-subject input').val(instance.subject);
