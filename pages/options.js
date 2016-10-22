@@ -1,5 +1,12 @@
 var FastMailEnhancementSuiteOptions = [
     {
+      "name": "send_confirmation"
+    , "title": "Send confirmation"
+    , "description": "Requires confirmation to send email. Handy for users of FastMail keyboard shortcuts."
+    , "image": false
+    , "default": false
+  }
+  , {
       "name": "forgotten_attachment"
     , "title": "Attachment reminder"
     , "description": "Reminds you if you forget to attach a file if you mention it in in the body."

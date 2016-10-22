@@ -87,6 +87,19 @@ function FastMailEnhancementSuite(options) {
 
   // Features /////////////////////////////////////////////////////////////////
 
+  $.option('send_confirmation', function () {
+    $.waitFor('FastMail.ComposeController.prototype.send', function() {
+      var fn = FastMail.ComposeController.prototype.send;
+
+      FastMail.ComposeController.prototype.send = function(t) {
+        if (!confirm("Press OK to send email."))
+          return;
+
+        return fn.apply(this, Array.prototype.slice.call(arguments));
+      };
+    }, 500);
+  });
+
   $.option('forgotten_attachment', function () {
     /*
     I have attached
