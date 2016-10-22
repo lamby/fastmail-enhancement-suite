@@ -4,7 +4,7 @@ var FastMailEnhancementSuiteOptions = [
     , "title": "Send confirmation"
     , "description": "Requires confirmation to send email. Handy for users of FastMail keyboard shortcuts."
     , "image": false
-    , "default": true
+    , "default": false
   }
   , {
       "name": "forgotten_attachment"
