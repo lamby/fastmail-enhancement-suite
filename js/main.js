@@ -100,6 +100,22 @@ function FastMailEnhancementSuite(options) {
     }, 500);
   });
 
+  $.option('search_box_ctrl_enter_current_folder', function () {
+    $.waitFor('FastMail.views.mailSearchBox._search', function() {
+      var fn = FastMail.views.mailSearchBox._search;
+
+      FastMail.views.mailSearchBox._search = function (e) {
+        if ((e.ctrlKey || e.metaKey) && (e.keyCode == 13 || e.keyCode == 10)) {
+          FastMail.mail.set('searchIsGlobal', false);
+          this.doSearch();
+          return;
+        }
+
+        return fn.apply(this, Array.prototype.slice.call(arguments));
+      };
+    });
+  });
+
   $.option('forgotten_attachment', function () {
     /*
     I have attached
