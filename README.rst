@@ -1,7 +1,7 @@
 FastMail Enhancement Suite
 """"""""""""""""""""""""""
 
-A Chrome extension to enhance using FastMail.
+A Chrome extension to enhance using `FastMail <https://www.fastmail.com/?STKI=2887523>`__.
 
 Installation from Git
 =====================
