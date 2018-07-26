@@ -100,6 +100,23 @@ function FastMailEnhancementSuite(options) {
     }, 500);
   });
 
+  $.option('disable_send_mail', function () {
+    // Hide the buttton
+    $('<style/>')
+      .prop('type', 'text/css')
+      .html('.v-Button.s-send { display: none; }')
+      .appendTo('head')
+      ;
+
+    // Actually disable the functionality (ie. Ctrl+Enter)
+    $.waitFor('FastMail.ComposeController.prototype.send', function() {
+      var fn = FastMail.ComposeController.prototype.send;
+      FastMail.ComposeController.prototype.send = function(t) {
+        return;
+      };
+    }, 500);
+  });
+
   $.option('search_box_ctrl_enter_current_folder', function () {
     $.waitFor('FastMail.views.mailSearchBox._search', function() {
       var fn = FastMail.views.mailSearchBox._search;

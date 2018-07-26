@@ -27,4 +27,11 @@ var FastMailEnhancementSuiteOptions = [
     , "image": false
     , "default": false
   }
+  , {
+      "name": "disable_send_mail"
+    , "title": "Hide the 'Send mail' button"
+    , "description": "Disable the sending of mail."
+    , "image": false
+    , "default": false
+  }
 ]
