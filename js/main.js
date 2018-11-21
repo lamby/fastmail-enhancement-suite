@@ -80,7 +80,7 @@ function FastMailEnhancementSuite(options) {
           return;
         }
         clearTimeout(timeoutID);
-        fn();
+        fn(eval(val));
       }, interval);
     }
   });
@@ -88,9 +88,7 @@ function FastMailEnhancementSuite(options) {
   // Features /////////////////////////////////////////////////////////////////
 
   $.option('send_confirmation', function () {
-    $.waitFor('FastMail.ComposeController.prototype.send', function() {
-      var fn = FastMail.ComposeController.prototype.send;
-
+    $.waitFor('FastMail.ComposeController.prototype.send', function(fn) {
       FastMail.ComposeController.prototype.send = function(t) {
         if (!confirm("Press OK to send email."))
           return;
@@ -110,7 +108,6 @@ function FastMailEnhancementSuite(options) {
 
     // Actually disable the functionality (ie. Ctrl+Enter)
     $.waitFor('FastMail.ComposeController.prototype.send', function() {
-      var fn = FastMail.ComposeController.prototype.send;
       FastMail.ComposeController.prototype.send = function(t) {
         return;
       };
@@ -118,9 +115,7 @@ function FastMailEnhancementSuite(options) {
   });
 
   $.option('search_box_ctrl_enter_current_folder', function () {
-    $.waitFor('FastMail.views.mailSearchBox._search', function() {
-      var fn = FastMail.views.mailSearchBox._search;
-
+    $.waitFor('FastMail.views.mailSearchBox._search', function(fn) {
       FastMail.views.mailSearchBox._search = function (e) {
         if ((e.ctrlKey || e.metaKey) && (e.keyCode == 13 || e.keyCode == 10)) {
           FastMail.mail.set('searchIsGlobal', false);
@@ -145,9 +140,7 @@ function FastMailEnhancementSuite(options) {
     enclosed for
     */
 
-    $.waitFor('FastMail.ComposeController.prototype.send', function() {
-      var fn = FastMail.ComposeController.prototype.send;
-
+    $.waitFor('FastMail.ComposeController.prototype.send', function(fn) {
       FastMail.ComposeController.prototype.send = function(t) {
         var instance = FastMail.mail.screens.compose.instance;
 
