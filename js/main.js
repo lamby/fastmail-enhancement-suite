@@ -97,6 +97,9 @@ function FastMailEnhancementSuite(options) {
 
       // Update the "Subject" HTML element too
       $('.s-compose-subject input').val(subject);
+
+      // .. and the version when we are replying.
+      $('.s-compose-subject div')[0].firstChild.nodeValue = subject + ' ';
     }
   });
 
