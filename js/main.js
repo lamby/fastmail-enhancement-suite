@@ -146,6 +146,29 @@ function FastMailEnhancementSuite(options) {
     });
   });
 
+  $.always(function () {
+    $.setInterval(function() {
+      var wrapper = $('.v-Compose-addCcBcc').onceOnly();
+
+      if (wrapper.length == 0) {
+        return;
+      }
+
+      wrapper
+        .find('a:first')
+        .clone()
+        .text("Rename thread")
+        .prependTo(wrapper)
+        .on('click', function() {
+          var subject = prompt("Enter new subject name");
+
+          if (subject != null) {
+            $.setSubject(subject + " (was: \"" + $.getSubject() + "\")");
+          }
+        });
+    }, 500);
+  });
+
   $.option('forgotten_attachment', function () {
     /*
     I have attached
