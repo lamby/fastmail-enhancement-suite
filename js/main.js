@@ -82,6 +82,21 @@ function FastMailEnhancementSuite(options) {
         clearTimeout(timeoutID);
         fn(eval(val));
       }, interval);
+    },
+    getSubject: function () {
+      var instance = FastMail.mail.screens.compose.instance;
+
+      return instance.subject;
+    },
+    setSubject: function (subject) {
+      var instance = FastMail.mail.screens.compose.instance;
+
+      // Set the underlying data store; simply adjusting the element won't change
+      // the email once sent.
+      instance.subject = subject;
+
+      // Update the "Subject" HTML element too
+      $('.s-compose-subject input').val(subject);
     }
   });
 
@@ -160,13 +175,8 @@ function FastMailEnhancementSuite(options) {
   });
 
   this.appendToSubject = function (request) {
-    var instance = FastMail.mail.screens.compose.instance;
-
-    // Set the underlying data store; simply adjusting the element won't change
-    // the email once sent.
-    instance.subject += request.selectionText.replace(/\s+/g, ' ');
-
-    // Update the "Subject" element
-    $('.s-compose-subject input').val(instance.subject);
+    this.setSubject(
+      $.getSubject() + request.selectionText.replace(/\s+/g, ' ')
+    );
   };
 }
