@@ -1,4 +1,5 @@
 function FastMailEnhancementSuite(options) {
+  // See: https://github.com/fastmail/overture
 
   // Configuration ////////////////////////////////////////////////////////////
 
