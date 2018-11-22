@@ -92,15 +92,11 @@ function FastMailEnhancementSuite(options) {
     setSubject: function (subject) {
       var instance = FastMail.mail.screens.compose.instance;
 
-      // Set the underlying data store; simply adjusting the element won't change
-      // the email once sent.
-      instance.subject = subject;
-
-      // Update the "Subject" HTML element too
-      $('.s-compose-subject input').val(subject);
-
-      // .. and the version when we are replying.
-      $('.s-compose-subject div')[0].firstChild.nodeValue = subject + ' ';
+      instance
+        .beginPropertyChanges()
+        .set('subject', subject)
+        .endPropertyChanges()
+        ;
     }
   });
 
