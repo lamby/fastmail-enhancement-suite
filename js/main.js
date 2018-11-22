@@ -163,6 +163,31 @@ function FastMailEnhancementSuite(options) {
             $.setSubject(subject + " (was: \"" + $.getSubject() + "\")");
           }
         });
+
+      wrapper
+        .find('a:first')
+        .clone()
+        .text("Add to CC")
+        .prependTo(wrapper)
+        .on('click', function() {
+          var instance = FastMail.mail.screens.compose.instance;
+
+          var email = prompt("Enter address to add to CC");
+
+          if (email == null) {
+            return;
+          }
+
+          var cc = (instance.get('cc') + ', ' + email).replace(/^, /, '');
+          var body = '[Adding ' + email + ' to CC]\n\n' + instance.get('plainBody');
+
+          instance
+            .beginPropertyChanges()
+            .set('cc', cc)
+            .set('plainBody', body)
+            .endPropertyChanges()
+            ;
+        });
     }, 500);
   });
 
