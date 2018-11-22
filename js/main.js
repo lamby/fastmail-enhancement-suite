@@ -87,7 +87,7 @@ function FastMailEnhancementSuite(options) {
     getSubject: function () {
       var instance = FastMail.mail.screens.compose.instance;
 
-      return instance.subject;
+      return instance.get('subject');
     },
     setSubject: function (subject) {
       var instance = FastMail.mail.screens.compose.instance;
