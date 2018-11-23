@@ -34,4 +34,18 @@ var FastMailEnhancementSuiteOptions = [
     , "image": false
     , "default": false
   }
+  , {
+      "name": "rename_thread"
+    , "title": "Rename thread"
+    , "description": "Adds an button to the Compose page to easily 'rename' a thread, quoting the previous subject with 'was:'."
+    , "image": false
+    , "default": true
+  }
+  , {
+      "name": "add_to_cc"
+    , "title": "Add to CC"
+    , "description": "Adds an button to easily add a recipient to the CC, adding that text to the message body itself for transparency."
+    , "image": false
+    , "default": true
+  }
 ]

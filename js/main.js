@@ -153,42 +153,48 @@ function FastMailEnhancementSuite(options) {
         return;
       }
 
-      wrapper
-        .find('a:first')
-        .clone()
-        .text("Rename thread")
-        .prependTo(wrapper)
-        .on('click', function() {
-          var subject = prompt("Enter new subject name");
+      $.option('rename_thread', function () {
+        wrapper
+          .find('a:first')
+          .clone()
+          .text("Rename thread")
+          .prependTo(wrapper)
+          .on('click', function() {
+            var subject = prompt("Enter new subject name");
 
-          if (subject != null) {
-            $.setSubject(subject + " (was: \"" + $.getSubject() + "\")");
-          }
-        });
+            if (subject != null) {
+              $.setSubject(subject + " (was: \"" + $.getSubject() + "\")");
+            }
+          })
+          ;
+      });
 
-      wrapper
-        .find('a:first')
-        .clone()
-        .text("Add to CC")
-        .prependTo(wrapper)
-        .on('click', function() {
-          var instance = FastMail.mail.screens.compose.instance;
+      $.option('add_to_cc', function () {
+        wrapper
+          .find('a:first')
+          .clone()
+          .text("Add to CC")
+          .prependTo(wrapper)
+          .on('click', function() {
+            var instance = FastMail.mail.screens.compose.instance;
 
-          var email = prompt("Enter address to add to CC");
+            var email = prompt("Enter address to add to CC");
 
-          if (email == null) {
-            return;
-          }
+            if (email == null) {
+              return;
+            }
 
-          var cc = (instance.get('cc') + ', ' + email).replace(/^, /, '');
-          var body = '[Adding ' + email + ' to CC]\n\n' + instance.get('plainBody');
+            var cc = (instance.get('cc') + ', ' + email).replace(/^, /, '');
+            var body = '[Adding ' + email + ' to CC]\n\n' + instance.get('plainBody');
 
-          O.RunLoop.invoke(() => {
-            instance
-              .set('cc', cc)
-              .set('plainBody', body)
-              ;
-          });
+            O.RunLoop.invoke(() => {
+              instance
+                .set('cc', cc)
+                .set('plainBody', body)
+                ;
+            });
+          })
+          ;
         });
     }, 500);
   });
