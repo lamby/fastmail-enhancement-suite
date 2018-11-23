@@ -93,9 +93,7 @@ function FastMailEnhancementSuite(options) {
       var instance = FastMail.mail.screens.compose.instance;
 
       instance
-        .beginPropertyChanges()
         .set('subject', subject)
-        .endPropertyChanges()
         ;
     }
   });
@@ -182,10 +180,8 @@ function FastMailEnhancementSuite(options) {
           var body = '[Adding ' + email + ' to CC]\n\n' + instance.get('plainBody');
 
           instance
-            .beginPropertyChanges()
             .set('cc', cc)
             .set('plainBody', body)
-            .endPropertyChanges()
             ;
         });
     }, 500);
