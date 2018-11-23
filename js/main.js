@@ -95,6 +95,10 @@ function FastMailEnhancementSuite(options) {
       O.RunLoop.invoke(() => {
         instance.set('subject', subject);
       });
+
+      // Whilst we set the underlying data store we must also set the text
+      // version when we are replying manually.
+      $('.s-compose-subject div')[0].firstChild.nodeValue = subject + ' ';
     }
   });
 
