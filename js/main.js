@@ -92,9 +92,9 @@ function FastMailEnhancementSuite(options) {
     setSubject: function (subject) {
       var instance = FastMail.mail.screens.compose.instance;
 
-      instance
-        .set('subject', subject)
-        ;
+      O.RunLoop.invoke(() => {
+        instance.set('subject', subject);
+      });
     }
   });
 
@@ -179,10 +179,12 @@ function FastMailEnhancementSuite(options) {
           var cc = (instance.get('cc') + ', ' + email).replace(/^, /, '');
           var body = '[Adding ' + email + ' to CC]\n\n' + instance.get('plainBody');
 
-          instance
-            .set('cc', cc)
-            .set('plainBody', body)
-            ;
+          O.RunLoop.invoke(() => {
+            instance
+              .set('cc', cc)
+              .set('plainBody', body)
+              ;
+          });
         });
     }, 500);
   });
