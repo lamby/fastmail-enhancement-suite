@@ -176,16 +176,29 @@ function FastMailEnhancementSuite(options) {
           .text("Add to CC")
           .prependTo(wrapper)
           .on('click', function() {
+            var re = new RegExp(/^\[Adding (.*) to CC\]\n\n/);
             var instance = FastMail.mail.screens.compose.instance;
 
-            var email = prompt("Enter address to add to CC");
+            var emails = prompt("Enter address to add to CC");
 
-            if (email == null) {
+            if (emails == null) {
               return;
             }
 
-            var cc = (instance.get('cc') + ', ' + email).replace(/^, /, '');
-            var body = '[Adding ' + email + ' to CC]\n\n' + instance.get('plainBody');
+            // Construct new "Cc" header.
+            var cc = (instance.get('cc') + ', ' + emails).replace(/^, /, '');
+
+            var body = instance.get('plainBody');
+            var m = re.exec(body);
+
+            // If it was already there, strip first, then append to existing
+            // list.
+            if (m != null) {
+              body = body.replace(re, '');
+              emails = m[1] + " & " + emails;
+            }
+
+            body = "[Adding " + emails + " to CC]\n\n" + body;
 
             O.RunLoop.invoke(() => {
               instance
