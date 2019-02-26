@@ -85,12 +85,12 @@ function FastMailEnhancementSuite(options) {
       }, interval);
     },
     getSubject: function () {
-      var instance = FastMail.mail.screens.compose.instance;
+      var instance = FastMail.mail.draft;
 
       return instance.get('subject');
     },
     setSubject: function (subject) {
-      var instance = FastMail.mail.screens.compose.instance;
+      var instance = FastMail.mail.draft;
 
       O.RunLoop.invoke(() => {
         instance.set('subject', subject);
