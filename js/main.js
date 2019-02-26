@@ -226,12 +226,12 @@ function FastMailEnhancementSuite(options) {
 
     $.waitFor('FastMail.ComposeController.prototype.send', function(fn) {
       FastMail.ComposeController.prototype.send = function(t) {
-        var instance = FastMail.mail.screens.compose.instance;
+        var instance = FastMail.mail.draft;
 
         var mentionsAttachments =
-             /attach(ed|ment)/i.test(instance.plainBody)
-          || /ve\sincluded/i.test(instance.plainBody)
-          || /enclosed\sfor/i.test(instance.plainBody)
+             /attach(ed|ment)/i.test(instance.textBody)
+          || /ve\sincluded/i.test(instance.textBody)
+          || /enclosed\sfor/i.test(instance.textBody)
           ;
 
         if (mentionsAttachments && instance.attachments.length === 0 &&
