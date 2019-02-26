@@ -244,7 +244,7 @@ function FastMailEnhancementSuite(options) {
   });
 
   this.appendToSubject = function (request) {
-    this.setSubject(
+    $.setSubject(
       $.getSubject() + request.selectionText.replace(/\s+/g, ' ')
     );
   };
