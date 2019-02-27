@@ -201,7 +201,6 @@ function FastMailEnhancementSuite(options) {
             }
 
             body = "[Adding " + email + " to CC]\n\n" + body;
-            console.log(body);
 
             O.RunLoop.invoke(() => {
               instance
