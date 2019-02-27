@@ -215,37 +215,6 @@ function FastMailEnhancementSuite(options) {
     }, 500);
   });
 
-  $.option('forgotten_attachment', function () {
-    /*
-    I have attached
-    I've attached
-    I have included
-    I've included
-    see the attached
-    see the attachment
-    attached file
-    enclosed for
-    */
-
-    $.waitFor('FastMail.ComposeController.prototype.send', function(fn) {
-      FastMail.ComposeController.prototype.send = function(t) {
-        var instance = FastMail.mail.draft;
-
-        var mentionsAttachments =
-             /attach(ed|ment)/i.test(instance.textBody)
-          || /ve\sincluded/i.test(instance.textBody)
-          || /enclosed\sfor/i.test(instance.textBody)
-          ;
-
-        if (mentionsAttachments && instance.attachments.length === 0 &&
-              !confirm("Did you mean to attach files? Press OK to send anyway."))
-          return;
-
-        return fn.apply(this, Array.prototype.slice.call(arguments));
-      };
-    }, 500);
-  });
-
   this.appendToSubject = function (request) {
     $.setSubject(
       $.getSubject() + request.selectionText.replace(/\s+/g, ' ')
