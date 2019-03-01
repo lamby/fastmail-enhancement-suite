@@ -85,15 +85,15 @@ function FastMailEnhancementSuite(options) {
       }, interval);
     },
     getSubject: function () {
-      var instance = FastMail.mail.draft;
+      var subjectView = FastMail.mail.draft.get('view').subjectView;
 
-      return instance.get('subject');
+      return subjectView.get('value');
     },
     setSubject: function (subject) {
-      var instance = FastMail.mail.draft;
+      var subjectView = FastMail.mail.draft.get('view').subjectView;
 
       O.RunLoop.invoke(() => {
-        instance.set('subject', subject);
+        subjectView.set('value', subject);
       });
 
       // Whilst we set the underlying data store we must also set the text
@@ -177,35 +177,34 @@ function FastMailEnhancementSuite(options) {
           .prependTo(wrapper)
           .on('click', function() {
             var re = new RegExp(/^\[Adding (.*) to CC\]\n\n/);
-            var instance = FastMail.mail.draft;
+            var draft = FastMail.mail.draft;
+            var ccView = draft.get('view').ccView;
+            var bodyView = draft.get('view').bodyView;
 
             var email = prompt("Enter address to add to CC");
-
             if (email == null) {
               return;
             }
 
-            // Set the "Cc" header itself
-            var cc = instance.get('cc');
-            cc.push({email: email, name: null});
+            // Construct new "Cc" header.
+            var cc = (ccView.get('value') + ', ' + email).replace(/^, /, '');
 
-            var body = instance.textBody;
+            // Calculate the body.
+            var body = bodyView.get('value');
             var m = re.exec(body);
 
             // If it was already there, strip first, then append to existing
             // list.
             if (m != null) {
               body = body.replace(re, '');
-              emails = m[1] + " & " + email;
+              email = m[1] + " & " + email;
             }
 
             body = "[Adding " + email + " to CC]\n\n" + body;
 
             O.RunLoop.invoke(() => {
-              instance
-                .set('cc', cc)
-                .set('textBody', body)
-                ;
+              ccView.set('value', cc);
+              bodyView.set('value', body);
             });
           })
           ;
