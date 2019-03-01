@@ -188,7 +188,6 @@ function FastMailEnhancementSuite(options) {
             // Set the "Cc" header itself
             var cc = instance.get('cc');
             cc.push({email: email, name: null});
-            console.log(cc);
 
             var body = instance.textBody;
             var m = re.exec(body);
